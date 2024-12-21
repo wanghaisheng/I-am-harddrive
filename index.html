@@ -2,30 +2,30 @@
 <html><head><base href="/" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>体重转TB硬盘计算器</title>
-<meta name="description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
+<title>Weight to TB Hard Drive Calculator</title>
+<meta name="description" content="A fun tool that converts your weight into hard drive storage capacity and provides interesting storage knowledge and comparisons.">
 <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
 
 <!-- Open Graph Meta Tags -->
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:title" content="体重转TB硬盘计算器 - 趣味科技">
-<meta property="og:description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
-<meta property="og:url" content="https://weight-to-storage.example.com">
-<meta property="og:site_name" content="趣味科技工具">
+<meta property="og:title" content="Weight to TB Hard Drive Calculator - Fun Tech">
+<meta property="og:description" content="A fun tool that converts your weight into hard drive storage capacity and provides interesting storage knowledge and comparisons.">
+<meta property="og:url" content="https://weight-to-storage-en.example.com">
+<meta property="og:site_name" content="Fun Tech Tools">
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="体重转TB硬盘计算器 - 趣味科技">
-<meta name="twitter:description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
+<meta name="twitter:title" content="Weight to TB Hard Drive Calculator - Fun Tech">
+<meta name="twitter:description" content="A fun tool that converts your weight into hard drive storage capacity and provides interesting storage knowledge and comparisons.">
 
 <!-- Schema.org Markup -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "体重转TB硬盘计算器",
-  "description": "一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。",
+  "name": "Weight to TB Hard Drive Calculator",
+  "description": "A fun tool that converts your weight into hard drive storage capacity and provides interesting storage knowledge and comparisons.",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
   "offers": {
@@ -453,21 +453,21 @@ body {
 </head>
 <body>
 
-<h1>体重转TB硬盘计算器</h1>
+<h1>Weight to TB Hard Drive Calculator</h1>
 
 <div class="input-section">
-  <h2>输入你的体重</h2>
-  <input type="number" class="weight-input" id="weightInput" placeholder="公斤" min="1" max="300">
+  <h2>Enter Your Weight</h2>
+  <input type="number" class="weight-input" id="weightInput" placeholder="kg" min="1" max="300">
   <div class="error-message" id="errorMessage"></div>
   <div class="gender-select">
     <label>
-      <input type="radio" name="gender" value="male" checked> 男性
+      <input type="radio" name="gender" value="male" checked> Male
     </label>
     <label>
-      <input type="radio" name="gender" value="female"> 女性
+      <input type="radio" name="gender" value="female"> Female
     </label>
   </div>
-  <button class="calculate-btn" onclick="calculateStorage()">开始计算</button>
+  <button class="calculate-btn" onclick="calculateStorage()">Calculate</button>
 </div>
 
 <div class="loading" id="loadingOverlay">
@@ -488,7 +488,7 @@ body {
 <div class="drives-container" id="drivesContainer"></div>
 
 <div class="stats-section" id="statsSection" style="display: none;">
-  <h3>统计数据</h3>
+  <h3>Statistics</h3>
   <div class="percentage-bar">
     <div class="percentage-fill" id="percentageFill"></div>
   </div>
@@ -497,7 +497,7 @@ body {
 </div>
 
 <div class="brain-section" id="brainSection" style="display: none;">
-  <h3>大脑容量分析</h3>
+  <h3>Brain Capacity Analysis</h3>
   <div class="brain-visualization">
     <svg viewBox="0 0 100 100">
       <path d="M50 10 C20 10 10 30 10 50 C10 70 30 90 50 90 C70 90 90 70 90 50 C90 30 80 10 50 10Z"/>
@@ -508,86 +508,86 @@ body {
 </div>
 
 <div class="share-section">
-  <button class="share-btn" onclick="shareOnTwitter()">分享到Twitter</button>
-  <button class="share-btn" onclick="shareOnWeibo()">分享到微博</button>
+  <button class="share-btn" onclick="shareOnTwitter()">Share on Twitter</button>
+  <button class="share-btn" onclick="shareOnWeibo()">Share on Weibo</button>
 </div>
 
 <div class="locale-nav">
-  <a href="https://weight-to-storage-en.example.com" class="locale-link">English</a>
-  <a href="https://weight-to-storage-zh.example.com" class="locale-link active">中文</a>
+  <a href="https://weight-to-storage-en.example.com" class="locale-link active">English</a>
+  <a href="https://weight-to-storage-zh.example.com" class="locale-link">中文</a>
 </div>
 
 <script>
 const funFacts = [
-  "一部4K电影大约需要100GB存储空间",
-  "1TB可以存储约250,000张高清照片",
-  "一个1TB硬盘可以存储约500小时的HD视频",
-  "现代游戏平均需要100GB存储空间",
-  "1TB相当于1,000,000MB",
-  "第一个硬盘在1956年由IBM发明，容量仅有3.75MB",
-  "目前世界上最大的消费级硬盘容量为20TB",
-  "一个1TB硬盘可以存储约200,000首MP3音乐",
-  "云存储数据中心每天处理的数据量超过2.5艾字节",
-  "全球每分钟产生的数据量超过1.7MB",
-  "人类大脑的存储容量约为2.5PB，相当于300年的数字电视节目",
-  "大脑每天产生约70,000个想法",
-  "全球数据中心每年消耗的电量相当于25个发电厂的输出",
-  "如果把人类创造的所有数据打印成书，可以覆盖整个中国四次"
+  "A 4K movie requires about 100GB of storage",
+  "1TB can store about 250,000 high-res photos",
+  "A 1TB hard drive can store about 500 hours of HD video",
+  "Modern games need an average of 100GB storage",
+  "1TB equals 1,000,000MB",
+  "The first hard drive was invented by IBM in 1956, with only 3.75MB",
+  "The largest consumer hard drive today is 20TB",
+  "A 1TB hard drive can store about 200,000 MP3 songs",
+  "Data centers process over 2.5 exabytes daily", 
+  "Global data created per minute exceeds 1.7MB",
+  "Human brain storage capacity is about 2.5PB, equal to 300 years of TV",
+  "The brain generates about 70,000 thoughts per day",
+  "Global data centers consume power equal to 25 power plants",
+  "If printed, human-created data would cover China four times"
 ];
 
 const comparisons = [
   {
     icon: '📱',
-    text: '部iPhone 13 Pro (1TB)'
+    text: 'iPhone 13 Pro (1TB)'
   },
   {
     icon: '🎮',
-    text: '个现代游戏 (100GB)'
+    text: 'modern games (100GB)'
   },
   {
     icon: '🎬',
-    text: '部4K电影 (100GB)'
+    text: '4K movies (100GB)'
   }
 ];
 
 const BRAIN_COMPARISONS = [
   {
     icon: '🧠',
-    text: '个普通人的大脑容量'
+    text: 'average human brain capacity'
   },
   {
     icon: '💻',
-    text: '台超级计算机'
+    text: 'supercomputer'
   },
   {
     icon: '📚',
-    text: '个图书馆的数字存储量'
+    text: 'library digital storage'
   }
 ];
 
 const roastMessages = [
-  "你的硬盘容量比一个数据中心还大！建议少吃点零食，多运动~",
-  "哇！这么大的存储空间，可以存储整个互联网了！",
-  "你的体重转换成的存储空间足够备份整个Netflix了！",
-  "这么大的容量，建议把一部分转化成肌肉！",
-  "存储容量惊人！但还是建议少吃点垃圾食品哦~",
-  "这个存储空间比NASA的超级计算机还大！要不要考虑减重？",
-  "你的存储容量可以存储一百万部电影！不过还是建议多运动！"
+  "Your hard drive capacity is bigger than a data center! Maybe try some exercise~",
+  "Wow! This much storage could hold the entire internet!",
+  "Your storage capacity could backup all of Netflix!",
+  "Such huge capacity, consider converting some to muscle!",
+  "Amazing storage! But maybe cut down on junk food~",
+  "Your storage is bigger than NASA's supercomputer! Consider losing weight?",
+  "Your storage could hold a million movies! But maybe exercise more!"
 ];
 
 const BRAIN_FACTS = [
-  "人类大脑平均重量约为1.4kg",
-  "大脑每秒可以处理约11万GB的信息",
-  "大脑的存储容量估计在2.5PB左右",
-  "一个神经元可以与多达10,000个其他神经元建立连接",
-  "大脑中约有860亿个神经元",
+  "Average human brain weighs about 1.4kg",
+  "Brain processes about 110,000GB per second",
+  "Brain storage capacity estimated at 2.5PB",
+  "One neuron can connect with up to 10,000 others",
+  "Brain has about 86 billion neurons",
 ];
 
 const BRAIN_ROASTS = [
-  "你的大脑存储容量比超级计算机还强大！不过要常用才不会生锈哦~",
-  "这么大的脑容量，不如多用来学习新知识！",
-  "你的大脑处理能力惊人！要好好利用这些潜力！",
-  "这么强大的计算能力，不如去解决下世界难题？",
+  "Your brain storage is stronger than a supercomputer! Don't let it get rusty though~",
+  "With such brain capacity, why not learn something new!",
+  "Your brain processing power is amazing! Use that potential!",
+  "With such computing power, why not solve world problems?",
 ];
 
 function getRandomFunFact() {
@@ -634,13 +634,13 @@ async function calculateStorage() {
   
   // Input validation
   if (!weightInput.value) {
-    showError('请输入体重');
+    showError('Please enter weight');
     return;
   }
   
   const weight = parseFloat(weightInput.value);
   if (weight <= 0 || weight > 300) {
-    showError('请输入1-300公斤之间的有效体重');
+    showError('Please enter a valid weight between 1-300kg');
     return;
   }
 
@@ -669,7 +669,7 @@ async function calculateStorage() {
     
     const percentile = calculatePercentile(tbStorage);
     percentageFill.style.width = `${percentile}%`;
-    percentageText.textContent = `你的存储容量超过了 ${percentile.toFixed(1)}% 的用户！`;
+    percentageText.textContent = `Your storage capacity exceeds ${percentile.toFixed(1)}% of users!`;
     
     const roastIndex = Math.floor(percentile / 15); 
     const roastMessage = roastMessages[Math.min(roastIndex, roastMessages.length - 1)];
@@ -684,7 +684,7 @@ async function calculateStorage() {
     setTimeout(() => mainDrive.style.transform = 'scale(1) rotate(0deg)', 500);
     
     const resultText = document.getElementById('resultText');
-    const finalText = `你的体重 ${weight}公斤 相当于 ${tbStorage}TB 存储空间！`;
+    const finalText = `Your weight of ${weight}kg is equivalent to ${tbStorage}TB of storage space!`;
     typeText(resultText, finalText);
     
     const funFact = document.getElementById('funFact');
@@ -697,7 +697,7 @@ async function calculateStorage() {
     updateStorageComparison(tbStorage);
     generateMiniDrives(tbStorage);
   } catch (error) {
-    showError('计算出错，请重试');
+    showError('Error calculating storage');
     console.error(error);
   } finally {
     loading.classList.remove('active');
@@ -739,7 +739,7 @@ function generateMiniDrives(tbStorage) {
 
 function updateStorageComparison(tbStorage) {
   const comparisonContainer = document.getElementById('storageComparison');
-  comparisonContainer.innerHTML = '<h3>存储容量对比</h3>';
+  comparisonContainer.innerHTML = '<h3>Storage Comparison</h3>';
   
   comparisons.forEach((comparison, index) => {
     const div = document.createElement('div');
@@ -748,7 +748,7 @@ function updateStorageComparison(tbStorage) {
     const amount = calculateComparison(tbStorage, comparison.text);
     div.innerHTML = `
       <span class="comparison-icon">${comparison.icon}</span>
-      <span>相当于 ${amount} ${comparison.text}</span>
+      <span>Equivalent to ${amount} ${comparison.text}</span>
     `;
     
     comparisonContainer.appendChild(div);
@@ -761,11 +761,11 @@ function updateStorageComparison(tbStorage) {
 
 function calculateComparison(tbStorage, type) {
   switch(type) {
-    case '部iPhone 13 Pro (1TB)':
+    case 'iPhone 13 Pro (1TB)':
       return Math.floor(tbStorage);
-    case '个现代游戏 (100GB)':
+    case 'modern games (100GB)':
       return Math.floor(tbStorage * 10);
-    case '部4K电影 (100GB)':
+    case '4K movies (100GB)':
       return Math.floor(tbStorage * 10);
     default:
       return 0;
@@ -774,13 +774,13 @@ function calculateComparison(tbStorage, type) {
 
 function shareOnTwitter() {
   const resultText = document.getElementById('resultText').textContent;
-  const text = encodeURIComponent(`${resultText} 来测测你的体重能存储多少数据！`);
+  const text = encodeURIComponent(`${resultText} Come check how much data your weight can store!`);
   window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
 }
 
 function shareOnWeibo() {
   const resultText = document.getElementById('resultText').textContent;
-  const text = encodeURIComponent(`${resultText} 来测测你的体重能存储多少数据！`);
+  const text = encodeURIComponent(`${resultText} Come check how much data your weight can store!`);
   window.open(`https://service.weibo.com/share/share.php?text=${text}`, '_blank');
 }
 
@@ -788,7 +788,7 @@ document.getElementById('weightInput').addEventListener('input', function(e) {
   const value = parseFloat(e.target.value);
   if (value > 300) {
     e.target.value = 300;
-    showError('最大输入值为300公斤');
+    showError('Maximum input value is 300kg');
   }
 });
 
@@ -799,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainDrive.style.transform = 'scale(1)';
   }, 300);
 
-  // Get current locale from URL or default to 'zh'
+  // Get current locale from URL or default to 'en'
   const currentLocale = window.location.hostname.includes('-en') ? 'en' : 'zh';
   
   // Update active state of locale links
@@ -817,10 +817,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateBrainSection(brainCapacity) {
   const brainStats = document.getElementById('brainStats');
   brainStats.innerHTML = `
-    <p>预计大脑重量: ${brainCapacity.weight}kg</p>
-    <p>大脑存储容量: ${brainCapacity.storage}TB</p>
-    <p>神经元数量: ${brainCapacity.neurons}</p>
-    <p>突触连接数: ${brainCapacity.synapses}</p>
+    <p>Estimated brain weight: ${brainCapacity.weight}kg</p>
+    <p>Brain storage capacity: ${brainCapacity.storage}TB</p>
+    <p>Number of neurons: ${brainCapacity.neurons}</p>
+    <p>Number of synapses: ${brainCapacity.synapses}</p>
   `;
 
   // Add brain comparison visualization
@@ -838,11 +838,11 @@ function updateBrainSection(brainCapacity) {
 
 function calculateBrainComparison(brainStorage, type) {
   switch(type) {
-    case '个普通人的大脑容量':
+    case 'average human brain capacity':
       return Math.floor(brainStorage / 2.5); // Assuming average brain storage is about 2.5TB
-    case '台超级计算机':
+    case 'supercomputer':
       return Math.floor(brainStorage / 500); // Assuming average supercomputer has around 500TB
-    case '个图书馆的数字存储量':
+    case 'library digital storage':
       return Math.floor(brainStorage / 100); // Assuming average library digital storage is around 100TB
     default:
       return 0;

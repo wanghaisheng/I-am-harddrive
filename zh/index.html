@@ -1,1 +1,853 @@
 
+<html><head><base href="/zh" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>体重转TB硬盘计算器</title>
+<meta name="description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="website">
+<meta property="og:title" content="体重转TB硬盘计算器 - 趣味科技">
+<meta property="og:description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
+<meta property="og:url" content="https://weight-to-storage.example.com">
+<meta property="og:site_name" content="趣味科技工具">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="体重转TB硬盘计算器 - 趣味科技">
+<meta name="twitter:description" content="一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。">
+
+<!-- Schema.org Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "体重转TB硬盘计算器",
+  "description": "一个有趣的工具，可以将你的体重转换成硬盘存储容量，并提供有趣的存储知识和对比。",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<style>
+:root {
+  --dark-grey: #333;
+  --blue: #007bff;
+  --light-blue: #4da6ff;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--dark-grey);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.input-section {
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  width: 400px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.input-section::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.weight-input {
+  width: 120px;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  background: rgba(255,255,255,0.9);
+  transition: all 0.3s ease;
+}
+
+.weight-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--light-blue);
+  transform: scale(1.05);
+}
+
+.calculate-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.calculate-btn:hover {
+  background: var(--light-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.calculate-btn:active {
+  transform: translateY(0);
+}
+
+.hard-drive {
+  position: relative;
+  width: 400px;
+  height: 260px;
+  background: linear-gradient(145deg, #444, #222);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  margin: 20px 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.platter {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(145deg, #666, #333);
+  border-radius: 50%;
+  position: absolute;
+  left: 40px;
+  top: 30px;
+  animation: spin 2s linear infinite;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.platter::before {
+  content: '';
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.platter::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(#999, #666);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.result-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.result-text {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.fun-fact {
+  font-size: 16px;
+  color: #aaa;
+  margin: 10px 0;
+}
+
+.drives-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  max-width: 800px;
+}
+
+.mini-drive {
+  width: 60px;
+  height: 40px;
+  background: linear-gradient(145deg, #444, #222);
+  border-radius: 5px;
+  transform: scale(0);
+  transition: transform 0.5s;
+}
+
+.storage-comparison {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease-out;
+}
+
+.comparison-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.comparison-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  fill: #fff;
+}
+
+.share-section {
+  margin-top: 20px;
+}
+
+.share-btn {
+  background: #1da1f2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.share-btn:hover {
+  opacity: 0.8;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.roast-text {
+  font-size: 18px;
+  color: #ff6b6b;
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(255,0,0,0.1);
+  border-radius: 8px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.stats-section {
+  background: rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 400px;
+}
+
+.percentage-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.percentage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--light-blue));
+  width: 0%;
+  transition: width 1s ease-out;
+  position: relative;
+}
+
+.percentage-text {
+  color: #fff;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.brain-section {
+  background: rgba(0,0,0,0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  width: 400px;
+  text-align: center;
+}
+
+.brain-icon {
+  font-size: 48px;
+  margin: 10px 0;
+  animation: pulse 2s infinite;
+}
+
+.brain-stats {
+  font-size: 18px;
+  margin: 15px 0;
+  color: #4da6ff;
+}
+
+.brain-fact {
+  font-size: 16px;
+  color: #aaa;
+  margin: 10px 0;
+  font-style: italic;
+}
+
+.gender-select {
+  margin: 10px 0;
+}
+
+.gender-select label {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.loading.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff;
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.brain-visualization {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  transition: transform 0.5s;
+}
+
+.brain-visualization svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px rgba(77, 166, 255, 0.3));
+}
+
+.brain-visualization path {
+  fill: var(--blue);
+  animation: glow 2s infinite alternate;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin: 5px 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s;
+}
+
+.error-message.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes glow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.3); }
+}
+
+.brain-comparison {
+  margin-top: 15px;
+}
+
+.brain-comp-item {
+  font-size: 16px;
+  color: #fff;
+  margin: 5px 0;
+}
+
+.locale-nav {
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.locale-link {
+  display: inline-block;
+  padding: 8px 15px;
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.locale-link:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.locale-link.active {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+</style>
+</head>
+<body>
+
+<h1>体重转TB硬盘计算器</h1>
+
+<div class="input-section">
+  <h2>输入你的体重</h2>
+  <input type="number" class="weight-input" id="weightInput" placeholder="公斤" min="1" max="300">
+  <div class="error-message" id="errorMessage"></div>
+  <div class="gender-select">
+    <label>
+      <input type="radio" name="gender" value="male" checked> 男性
+    </label>
+    <label>
+      <input type="radio" name="gender" value="female"> 女性
+    </label>
+  </div>
+  <button class="calculate-btn" onclick="calculateStorage()">开始计算</button>
+</div>
+
+<div class="loading" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+</div>
+
+<div class="hard-drive" id="mainDrive">
+  <div class="platter"></div>
+</div>
+
+<div class="result-section">
+  <div class="result-text" id="resultText"></div>
+  <div class="fun-fact" id="funFact"></div>
+</div>
+
+<div class="storage-comparison" id="storageComparison"></div>
+
+<div class="drives-container" id="drivesContainer"></div>
+
+<div class="stats-section" id="statsSection" style="display: none;">
+  <h3>统计数据</h3>
+  <div class="percentage-bar">
+    <div class="percentage-fill" id="percentageFill"></div>
+  </div>
+  <div class="percentage-text" id="percentageText"></div>
+  <div class="roast-text" id="roastText"></div>
+</div>
+
+<div class="brain-section" id="brainSection" style="display: none;">
+  <h3>大脑容量分析</h3>
+  <div class="brain-visualization">
+    <svg viewBox="0 0 100 100">
+      <path d="M50 10 C20 10 10 30 10 50 C10 70 30 90 50 90 C70 90 90 70 90 50 C90 30 80 10 50 10Z"/>
+    </svg>
+  </div>
+  <div class="brain-stats" id="brainStats"></div>
+  <div class="brain-fact" id="brainFact"></div>
+</div>
+
+<div class="share-section">
+  <button class="share-btn" onclick="shareOnTwitter()">分享到Twitter</button>
+  <button class="share-btn" onclick="shareOnWeibo()">分享到微博</button>
+</div>
+
+<div class="locale-nav">
+  <a href="https://weight-to-storage-en.example.com" class="locale-link">English</a>
+  <a href="https://weight-to-storage-zh.example.com" class="locale-link active">中文</a>
+</div>
+
+<script>
+const funFacts = [
+  "一部4K电影大约需要100GB存储空间",
+  "1TB可以存储约250,000张高清照片",
+  "一个1TB硬盘可以存储约500小时的HD视频",
+  "现代游戏平均需要100GB存储空间",
+  "1TB相当于1,000,000MB",
+  "第一个硬盘在1956年由IBM发明，容量仅有3.75MB",
+  "目前世界上最大的消费级硬盘容量为20TB",
+  "一个1TB硬盘可以存储约200,000首MP3音乐",
+  "云存储数据中心每天处理的数据量超过2.5艾字节",
+  "全球每分钟产生的数据量超过1.7MB",
+  "人类大脑的存储容量约为2.5PB，相当于300年的数字电视节目",
+  "大脑每天产生约70,000个想法",
+  "全球数据中心每年消耗的电量相当于25个发电厂的输出",
+  "如果把人类创造的所有数据打印成书，可以覆盖整个中国四次"
+];
+
+const comparisons = [
+  {
+    icon: '📱',
+    text: '部iPhone 13 Pro (1TB)'
+  },
+  {
+    icon: '🎮',
+    text: '个现代游戏 (100GB)'
+  },
+  {
+    icon: '🎬',
+    text: '部4K电影 (100GB)'
+  }
+];
+
+const BRAIN_COMPARISONS = [
+  {
+    icon: '🧠',
+    text: '个普通人的大脑容量'
+  },
+  {
+    icon: '💻',
+    text: '台超级计算机'
+  },
+  {
+    icon: '📚',
+    text: '个图书馆的数字存储量'
+  }
+];
+
+const roastMessages = [
+  "你的硬盘容量比一个数据中心还大！建议少吃点零食，多运动~",
+  "哇！这么大的存储空间，可以存储整个互联网了！",
+  "你的体重转换成的存储空间足够备份整个Netflix了！",
+  "这么大的容量，建议把一部分转化成肌肉！",
+  "存储容量惊人！但还是建议少吃点垃圾食品哦~",
+  "这个存储空间比NASA的超级计算机还大！要不要考虑减重？",
+  "你的存储容量可以存储一百万部电影！不过还是建议多运动！"
+];
+
+const BRAIN_FACTS = [
+  "人类大脑平均重量约为1.4kg",
+  "大脑每秒可以处理约11万GB的信息",
+  "大脑的存储容量估计在2.5PB左右",
+  "一个神经元可以与多达10,000个其他神经元建立连接",
+  "大脑中约有860亿个神经元",
+];
+
+const BRAIN_ROASTS = [
+  "你的大脑存储容量比超级计算机还强大！不过要常用才不会生锈哦~",
+  "这么大的脑容量，不如多用来学习新知识！",
+  "你的大脑处理能力惊人！要好好利用这些潜力！",
+  "这么强大的计算能力，不如去解决下世界难题？",
+];
+
+function getRandomFunFact() {
+  return funFacts[Math.floor(Math.random() * funFacts.length)];
+}
+
+function calculatePercentile(tbStorage) {
+  const averageStorage = 350; 
+  const stdDev = 100;
+  
+  const zScore = (tbStorage - averageStorage) / stdDev;
+  
+  const percentile = Math.min(99.9, Math.max(0.1, 
+    (1 - Math.exp(-zScore * 0.7)) * 100
+  ));
+  
+  return percentile;
+}
+
+function calculateBrainCapacity(weight, gender) {
+  const maleRatio = 0.02; 
+  const femaleRatio = 0.023; 
+  
+  const ratio = gender === 'female' ? femaleRatio : maleRatio;
+  const brainWeight = weight * ratio;
+  
+  const brainStorageCapacity = brainWeight * 1800; 
+  
+  const neuronCount = brainWeight * 86000000000 / 1.4; // Based on average brain having 86B neurons
+  const synapseCount = neuronCount * 1000; // Each neuron has ~1000 synapses
+  
+  return {
+    weight: brainWeight.toFixed(2),
+    storage: brainStorageCapacity.toFixed(2),
+    neurons: neuronCount.toExponential(2),
+    synapses: synapseCount.toExponential(2)
+  };
+}
+
+async function calculateStorage() {
+  const weightInput = document.getElementById('weightInput');
+  const errorMessage = document.getElementById('errorMessage');
+  const loading = document.getElementById('loadingOverlay');
+  
+  // Input validation
+  if (!weightInput.value) {
+    showError('请输入体重');
+    return;
+  }
+  
+  const weight = parseFloat(weightInput.value);
+  if (weight <= 0 || weight > 300) {
+    showError('请输入1-300公斤之间的有效体重');
+    return;
+  }
+
+  try {
+    // Show loading
+    loading.classList.add('active');
+    
+    // Artificial delay for effect
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const tbStorage = weight * 5;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const brainCapacity = calculateBrainCapacity(weight, gender);
+    
+    const brainSection = document.getElementById('brainSection');
+    brainSection.style.display = 'block';
+    
+    updateBrainSection(brainCapacity);
+    
+    const statsSection = document.getElementById('statsSection');
+    statsSection.style.display = 'block';
+    
+    const percentageFill = document.getElementById('percentageFill');
+    const percentageText = document.getElementById('percentageText');
+    const roastText = document.getElementById('roastText');
+    
+    const percentile = calculatePercentile(tbStorage);
+    percentageFill.style.width = `${percentile}%`;
+    percentageText.textContent = `你的存储容量超过了 ${percentile.toFixed(1)}% 的用户！`;
+    
+    const roastIndex = Math.floor(percentile / 15); 
+    const roastMessage = roastMessages[Math.min(roastIndex, roastMessages.length - 1)];
+    roastText.textContent = roastMessage;
+
+    const inputSection = document.querySelector('.input-section');
+    inputSection.style.transform = 'scale(0.98)';
+    setTimeout(() => inputSection.style.transform = 'scale(1)', 200);
+
+    const mainDrive = document.getElementById('mainDrive');
+    mainDrive.style.transform = 'scale(1.1) rotate(5deg)';
+    setTimeout(() => mainDrive.style.transform = 'scale(1) rotate(0deg)', 500);
+    
+    const resultText = document.getElementById('resultText');
+    const finalText = `你的体重 ${weight}公斤 相当于 ${tbStorage}TB 存储空间！`;
+    typeText(resultText, finalText);
+    
+    const funFact = document.getElementById('funFact');
+    funFact.style.opacity = '0';
+    setTimeout(() => {
+      funFact.textContent = getRandomFunFact();
+      funFact.style.opacity = '1';
+    }, 500);
+    
+    updateStorageComparison(tbStorage);
+    generateMiniDrives(tbStorage);
+  } catch (error) {
+    showError('计算出错，请重试');
+    console.error(error);
+  } finally {
+    loading.classList.remove('active');
+  }
+}
+
+function showError(message) {
+  const errorMessage = document.getElementById('errorMessage');
+  errorMessage.textContent = message;
+  errorMessage.classList.add('active');
+  
+  setTimeout(() => {
+    errorMessage.classList.remove('active');
+  }, 3000);
+}
+
+function typeText(element, text, index = 0) {
+  if (index < text.length) {
+    element.textContent = text.substring(0, index + 1);
+    setTimeout(() => typeText(element, text, index + 1), 30);
+  }
+}
+
+function generateMiniDrives(tbStorage) {
+  const container = document.getElementById('drivesContainer');
+  container.innerHTML = '';
+  const driveCount = Math.min(Math.ceil(tbStorage / 10), 50);
+  
+  for (let i = 0; i < driveCount; i++) {
+    const miniDrive = document.createElement('div');
+    miniDrive.className = 'mini-drive';
+    container.appendChild(miniDrive);
+    
+    setTimeout(() => {
+      miniDrive.style.transform = 'scale(1) rotate(' + (Math.random() * 10 - 5) + 'deg)';
+    }, i * 100);
+  }
+}
+
+function updateStorageComparison(tbStorage) {
+  const comparisonContainer = document.getElementById('storageComparison');
+  comparisonContainer.innerHTML = '<h3>存储容量对比</h3>';
+  
+  comparisons.forEach((comparison, index) => {
+    const div = document.createElement('div');
+    div.className = 'comparison-item';
+    
+    const amount = calculateComparison(tbStorage, comparison.text);
+    div.innerHTML = `
+      <span class="comparison-icon">${comparison.icon}</span>
+      <span>相当于 ${amount} ${comparison.text}</span>
+    `;
+    
+    comparisonContainer.appendChild(div);
+    
+    setTimeout(() => {
+      div.classList.add('visible');
+    }, index * 200);
+  });
+}
+
+function calculateComparison(tbStorage, type) {
+  switch(type) {
+    case '部iPhone 13 Pro (1TB)':
+      return Math.floor(tbStorage);
+    case '个现代游戏 (100GB)':
+      return Math.floor(tbStorage * 10);
+    case '部4K电影 (100GB)':
+      return Math.floor(tbStorage * 10);
+    default:
+      return 0;
+  }
+}
+
+function shareOnTwitter() {
+  const resultText = document.getElementById('resultText').textContent;
+  const text = encodeURIComponent(`${resultText} 来测测你的体重能存储多少数据！`);
+  window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+}
+
+function shareOnWeibo() {
+  const resultText = document.getElementById('resultText').textContent;
+  const text = encodeURIComponent(`${resultText} 来测测你的体重能存储多少数据！`);
+  window.open(`https://service.weibo.com/share/share.php?text=${text}`, '_blank');
+}
+
+document.getElementById('weightInput').addEventListener('input', function(e) {
+  const value = parseFloat(e.target.value);
+  if (value > 300) {
+    e.target.value = 300;
+    showError('最大输入值为300公斤');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mainDrive = document.getElementById('mainDrive');
+  mainDrive.style.transform = 'scale(0)';
+  setTimeout(() => {
+    mainDrive.style.transform = 'scale(1)';
+  }, 300);
+
+  // Get current locale from URL or default to 'zh'
+  const currentLocale = window.location.hostname.includes('-en') ? 'en' : 'zh';
+  
+  // Update active state of locale links
+  const localeLinks = document.querySelectorAll('.locale-link');
+  localeLinks.forEach(link => {
+    if ((link.textContent === 'English' && currentLocale === 'en') ||
+        (link.textContent === '中文' && currentLocale === 'zh')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+});
+
+function updateBrainSection(brainCapacity) {
+  const brainStats = document.getElementById('brainStats');
+  brainStats.innerHTML = `
+    <p>预计大脑重量: ${brainCapacity.weight}kg</p>
+    <p>大脑存储容量: ${brainCapacity.storage}TB</p>
+    <p>神经元数量: ${brainCapacity.neurons}</p>
+    <p>突触连接数: ${brainCapacity.synapses}</p>
+  `;
+
+  // Add brain comparison visualization
+  const brainComparison = document.createElement('div');
+  brainComparison.className = 'brain-comparison';
+  BRAIN_COMPARISONS.forEach(comparison => {
+    const compItem = document.createElement('div');
+    compItem.className = 'brain-comp-item';
+    compItem.innerHTML = `${comparison.icon} = ${calculateBrainComparison(brainCapacity.storage, comparison.text)}`;
+    brainComparison.appendChild(compItem);
+  });
+  
+  document.getElementById('brainSection').appendChild(brainComparison);
+}
+
+function calculateBrainComparison(brainStorage, type) {
+  switch(type) {
+    case '个普通人的大脑容量':
+      return Math.floor(brainStorage / 2.5); // Assuming average brain storage is about 2.5TB
+    case '台超级计算机':
+      return Math.floor(brainStorage / 500); // Assuming average supercomputer has around 500TB
+    case '个图书馆的数字存储量':
+      return Math.floor(brainStorage / 100); // Assuming average library digital storage is around 100TB
+    default:
+      return 0;
+  }
+}
+</script>
+
+</body></html>
